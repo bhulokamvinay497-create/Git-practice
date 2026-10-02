@@ -1,0 +1,58 @@
+How to reduce the docker image size:
+
+
+
+Leverage Multi-stage builds:
+Multi-stage builds separate the build environment from the final runtime environment. They allow you to compile & package your application in one stage and then copy only the necessary artifacts to the final image, reducing its size significantly.
+You'd typically combine these with a Light base Image as your final one (can you give me examples of such images?)
+I made a small video on how to do this 🔗 http://youtu.be/hyLCBj1ko98
+
+
+👉 Build Images from Scratch
+If you only need to run a statically-compiled, standalone executable (like a C++ or Go application), pack it inside an empty Image by using “scratch” as the base image.
+🔗 doc - https://lnkd.in/gxT2GTCX
+
+
+👉 Use fewer Layers
+Each instruction like RUN or COPY adds another layer to your image, thus increasing its size. Each layer comes with its own metadata & file system structures. The fewer layers you use, the lesser data overhead your image has.
+🔗 doc https://lnkd.in/eNkvGHAa
+
+
+ps- If you want to learn how to use Docker effectively, I teach it in my video 🔗 youtu.be/UxJsBW7nYfo
+
+
+Helm Commands:
+--------------
+
+🔏 helm install: Installs a chart onto Kubernetes cluster.
+helm install <release_name> <chart_name>
+
+🔏 helm upgrade: Upgrades a release to a new version of a chart.
+helm upgrade <release_name> <chart_name>
+
+🔏 helm rollback: Rolls back a release to a previous revision.
+helm rollback <release_name> <revision_number>
+
+🔏 helm list: Lists releases deployed to the cluster.
+helm list
+
+🔏 helm status: Displays the status of a release.
+helm status <release_name>
+
+🔏 helm uninstall: Uninstalls a release from the cluster.
+helm uninstall <release_name>
+
+🔏 helm dependency: Manages chart dependencies.
+helm dependency update <chart_directory>
+helm dependency build <chart_directory>
+
+🔏 helm package: Packages a chart directory into a chart archive.
+helm package <chart_directory>
+
+🔏 helm repo: Manages Helm chart repositories.
+helm repo add <repo_name> <repo_url>
+helm repo update
+helm repo list
+
+🔏 helm template: Renders the Kubernetes manifest templates locally.
+helm template <chart_name>
